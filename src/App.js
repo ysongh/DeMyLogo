@@ -1,9 +1,11 @@
 import './App.css';
 
+import Tasks from './components/tasks/Tasks';
+
 function App() {
   return (
     <div className="App">
-      <h1>DeMyLogo</h1>
+      <Tasks />
     </div>
   );
 }
