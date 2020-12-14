@@ -1,68 +1,82 @@
-import React, { Component } from 'react';
-import { Container } from '@material-ui/core';
-import Web3 from 'web3';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { Grid, Card, Box, CardContent, Typography, Button } from '@material-ui/core';
 
-import DeMyLogo from '../../abis/DeMyLogo.json';
-import Navbar from './Navbar';
-
-class Tasks extends Component{
-  state = {
-    account: '',
-    deMyLogoBlockchain: null
+const useStyles = makeStyles(() => ({
+  grow: { flexGrow: 1 },
+  mb: { marginBottom: '15px'},
+  btnAdd: {
+    marginTop: '10px',
+    marginBottom: '10px',
+    background: '#AC9742'
+  },
+  btnView: {
+    marginTop: '15px',
+    background: '#D2D868'
   }
+}));
 
-  async componentWillMount(){
-    await this.loadWeb3();
-    await this.loadBlockchainData();
-  }
+const Tasks = ({ account }) => {
+  const classes = useStyles();
 
-  async loadWeb3(){
-    if (window.ethereum) {
-      window.web3 = new Web3(window.ethereum);
+  return (
+    <div>
+      <Box display="flex" alignItems="center">
+        <Typography variant="h4" className={classes.grow}>
+          Tasks
+        </Typography>
+        <Button className={classes.btnAdd} size="large">
+          Create Task
+        </Button>
+      </Box>
+      
+      <Card className={classes.mb}>
+        <CardContent>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Box display="flex">
+                <Typography className={classes.grow} variant="h4">
+                  Some Company
+                </Typography>
+                <Typography variant="h4">
+                  $5
+                </Typography>
+              </Box>
+              <Typography variant="body1">
+                Need a logo with good colors and icons
+              </Typography>
+              <Button className={classes.btnView}>
+                View
+              </Button>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
 
-      await window.ethereum.enable();
-    }
-    else if (window.web3) {
-      window.web3 = new Web3(window.web3.currentProvider);
-    }
-    else {
-      window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!');
-    }
-  }
-
-  async loadBlockchainData(){
-    const web3 = window.web3;
-
-    const accounts = await web3.eth.getAccounts();
-    this.setState({ account: accounts[0] });
-
-    const networkId = await web3.eth.net.getId();
-    const networkData = DeMyLogo.networks[networkId];
-
-    if(networkData){
-      const abi = DeMyLogo.abi;
-      const address = DeMyLogo.networks[networkId].address;
-
-      const deMyLogoBlockchain = new web3.eth.Contract(abi, address);
-      this.setState({ deMyLogoBlockchain });
-
-      const name = await deMyLogoBlockchain.methods.name().call();
-      this.setState({ name });
-    }else{
-      window.alert('Contract is not deployed to detected network')
-    }
-  }
-
-  render(){
-    return (
-      <div>
-        <Navbar account={this.state.account} />
-        <Container>
-          <h1>{ this.state.name }</h1>
-        </Container>
-      </div>
-    );
-  }
+      <Card>
+        <CardContent>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Box display='flex'>
+                <Typography className={classes.grow} variant="h4">
+                  Some Company
+                </Typography>
+                <Typography variant="h4">
+                  $5
+                </Typography>
+              </Box>
+              <Typography variant="body1">
+                Need a logo with good colors and icons
+              </Typography>
+              <Button className={classes.btnView}>
+                View
+              </Button>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
+    </div>
+  );
 }
 
 export default Tasks;
