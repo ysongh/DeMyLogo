@@ -56,6 +56,14 @@ class Main extends Component{
     }
   }
 
+  async createTasks(taskName, taskDescription, taskContact, taskAmount){
+    const receipt = await this.state.deMyLogoBlockchain.methods.createTask(taskName, taskDescription, taskContact, taskAmount).send({ from: this.state.account });
+
+    if(receipt.status){
+      this.setState({ contentNumber: 1 });
+    }
+  }
+
   changeContent(num){
     this.setState({ contentNumber: num });  
   }
@@ -70,7 +78,8 @@ class Main extends Component{
         break;
       case 2:
         getContent = <AddTask
-          changeContent={this.changeContent.bind(this)} />;
+          changeContent={this.changeContent.bind(this)}
+          createTasks={this.createTasks.bind(this)} />;
         break;
       default:
         getContent = 'Page not found';

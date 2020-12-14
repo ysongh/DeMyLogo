@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const AddTask = ({ changeContent }) => {
+const AddTask = ({ changeContent, createTasks }) => {
   const classes = useStyles();
   const [name, setName] = useState('');
   const [instruction, setInstruction] = useState('');
@@ -21,7 +21,7 @@ const AddTask = ({ changeContent }) => {
   const [amount, setAmount] = useState('');
 
   const onSubmit = () => {
-    console.log(name, instruction, contact, walletAddress, amount);
+    createTasks(name, instruction, contact, walletAddress, amount);
   }
 
   return (
