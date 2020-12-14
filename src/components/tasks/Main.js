@@ -5,6 +5,7 @@ import Web3 from 'web3';
 import DeMyLogo from '../../abis/DeMyLogo.json';
 import Navbar from './Navbar';
 import Tasks from './Tasks';
+import AddTask from './AddTask';
 
 class Main extends Component{
   state = {
@@ -59,7 +60,7 @@ class Main extends Component{
       <div>
         <Navbar account={this.state.account} />
         <Container>
-          <Tasks />
+          <AddTask />
         </Container>
       </div>
     );
