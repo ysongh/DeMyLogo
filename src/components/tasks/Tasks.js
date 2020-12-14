@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Container } from '@material-ui/core';
 import Web3 from 'web3';
 
 import DeMyLogo from '../../abis/DeMyLogo.json';
+import Navbar from './Navbar';
 
 class Tasks extends Component{
   state = {
@@ -54,9 +56,10 @@ class Tasks extends Component{
   render(){
     return (
       <div>
-        <h1>DeMyLogo</h1>
-        <p>{ this.state.account }</p>
-        <p>{ this.state.name }</p>
+        <Navbar account={this.state.account} />
+        <Container>
+          <h1>{ this.state.name }</h1>
+        </Container>
       </div>
     );
   }
