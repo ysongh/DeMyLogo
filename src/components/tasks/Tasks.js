@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Tasks = ({ account }) => {
+const Tasks = ({ changeContent }) => {
   const classes = useStyles();
 
   return (
@@ -25,7 +25,7 @@ const Tasks = ({ account }) => {
         <Typography variant="h4" className={classes.grow}>
           Tasks
         </Typography>
-        <Button className={classes.btnAdd} size="large">
+        <Button className={classes.btnAdd} size="large" onClick={() => changeContent(2)}>
           Create Task
         </Button>
       </Box>

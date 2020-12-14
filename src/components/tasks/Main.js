@@ -10,7 +10,8 @@ import AddTask from './AddTask';
 class Main extends Component{
   state = {
     account: '',
-    deMyLogoBlockchain: null
+    deMyLogoBlockchain: null,
+    contentNumber: 1
   }
 
   async componentWillMount(){
@@ -55,12 +56,31 @@ class Main extends Component{
     }
   }
 
+  changeContent(num){
+    this.setState({ contentNumber: num });  
+  }
+
   render(){
+    let getContent;
+
+    switch (this.state.contentNumber) {
+      case 1:
+        getContent = <Tasks
+          changeContent={this.changeContent.bind(this)} />;
+        break;
+      case 2:
+        getContent = <AddTask
+          changeContent={this.changeContent.bind(this)} />;
+        break;
+      default:
+        getContent = 'Page not found';
+    }
+
     return (
       <div>
         <Navbar account={this.state.account} />
         <Container>
-          <AddTask />
+          { getContent }
         </Container>
       </div>
     );

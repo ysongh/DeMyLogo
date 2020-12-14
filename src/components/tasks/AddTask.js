@@ -7,11 +7,12 @@ const useStyles = makeStyles(() => ({
   mb: { marginBottom: '10px'},
   btn: {
     marginTop: '10px',
+    marginBottom: '10px',
     background: '#AC9742'
   },
 }));
 
-const AddTask = () => {
+const AddTask = ({ changeContent }) => {
   const classes = useStyles();
   const [name, setName] = useState('');
   const [instruction, setInstruction] = useState('');
@@ -85,8 +86,12 @@ const AddTask = () => {
                   variant="outlined" />
               </FormControl>
 
-              <Button className={classes.btn} variant="contained" onClick={() => onSubmit()} fullWidth>
+              <Button className={classes.btn} variant="contained" fullWidth onClick={() => onSubmit()}>
                 Submit
+              </Button>
+
+              <Button variant="contained" fullWidth onClick={() => changeContent(1)}>
+                Back
               </Button>
             </form>
           </CardContent>
