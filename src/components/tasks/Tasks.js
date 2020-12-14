@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Tasks = ({ changeContent }) => {
+const Tasks = ({ changeContent, tasks }) => {
   const classes = useStyles();
 
   return (
@@ -29,52 +29,33 @@ const Tasks = ({ changeContent }) => {
           Create Task
         </Button>
       </Box>
-      
-      <Card className={classes.mb}>
-        <CardContent>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Box display="flex">
-                <Typography className={classes.grow} variant="h4">
-                  Some Company
-                </Typography>
-                <Typography variant="h4">
-                  $5
-                </Typography>
-              </Box>
-              <Typography variant="body1">
-                Need a logo with good colors and icons
-              </Typography>
-              <Button className={classes.btnView}>
-                View
-              </Button>
-            </Grid>
-          </Grid>
-        </CardContent>
-      </Card>
 
-      <Card>
-        <CardContent>
-          <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <Box display='flex'>
-                <Typography className={classes.grow} variant="h4">
-                  Some Company
-                </Typography>
-                <Typography variant="h4">
-                  $5
-                </Typography>
-              </Box>
-              <Typography variant="body1">
-                Need a logo with good colors and icons
-              </Typography>
-              <Button className={classes.btnView}>
-                View
-              </Button>
-            </Grid>
-          </Grid>
-        </CardContent>
-      </Card>
+      { tasks.map(task => {
+        return(
+          <Card className={classes.mb} key={task.taskId}>
+            <CardContent>
+              <Grid container spacing={3}>
+                <Grid item xs={12}>
+                  <Box display="flex">
+                    <Typography className={classes.grow} variant="h4">
+                      { task.name }
+                    </Typography>
+                    <Typography variant="h4">
+                      { task.amount }
+                    </Typography>
+                  </Box>
+                  <Typography variant="body1">
+                    { task.description }
+                  </Typography>
+                  <Button className={classes.btnView}>
+                    View
+                  </Button>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        )
+      })}
     </div>
   );
 }

@@ -21,7 +21,7 @@ const AddTask = ({ changeContent, createTasks }) => {
   const [amount, setAmount] = useState('');
 
   const onSubmit = () => {
-    createTasks(name, instruction, contact, walletAddress, amount);
+    createTasks(name, instruction, contact, amount);
   }
 
   return (
