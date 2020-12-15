@@ -2,7 +2,7 @@ const { assert } = require('chai');
 
 const DeMyLogo = artifacts.require('./DeMyLogo.sol');
 
-contract(DeMyLogo, ([deployer, user1]) => {
+contract(DeMyLogo, ([deployer, user1, user2]) => {
     let deMyLogo;
 
     before(async() => {
@@ -61,6 +61,41 @@ contract(DeMyLogo, ([deployer, user1]) => {
             assert.equal(task.amount, taskAmount, 'Amount is correct');
             assert.equal(task.completed, false, 'Completed is correct');
             assert.equal(task.owner, user1, 'Owner is correct');
+        });
+    });
+
+    describe('logo', async() => {
+        let result;
+        let logoCount;
+
+        const fileHash = '28dioaF823jifjf2i3jifjisfwdlsk3isof'
+        const email = "somecompany123@mail.com";
+
+        before(async() => {
+            result = await deMyLogo.createLogo(fileHash, email, user1, { from: user2 });
+            logoCount = await deMyLogo.logoCount();
+        });
+
+        it('create logo', async() => {
+            const event = result.logs[0].args;
+            assert.equal(event.logoId.toNumber(), logoCount.toNumber(), 'Id is correct');
+            assert.equal(event.fileHash, fileHash, 'Hash is correct');
+            assert.equal(event.email, email, 'Email is correct');
+            assert.equal(event.designer, user2, 'Designer is correct');
+            assert.equal(event.owner, user1, 'Owner is correct');
+        });
+
+        it('has correct logo count', async() => {
+            assert.equal(logoCount, 1);
+        });
+
+        it('lists the logo', async() => {
+            const logo = await deMyLogo.logos(logoCount);
+            assert.equal(logo.logoId.toNumber(), logoCount.toNumber(), 'Id is correct');
+            assert.equal(logo.fileHash, fileHash, 'Hash is correct');
+            assert.equal(logo.email, email, 'Email is correct');
+            assert.equal(logo.designer, user2, 'Designer is correct');
+            assert.equal(logo.owner, user1, 'Owner is correct');
         });
     });
 })
