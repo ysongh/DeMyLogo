@@ -7,6 +7,7 @@ import Navbar from './Navbar';
 import Tasks from './Tasks';
 import AddTask from './AddTask';
 import TaskDetail from './TaskDetail';
+import AddLogo from '../logo/AddLogo';
 
 class Main extends Component{
   state = {
@@ -108,6 +109,11 @@ class Main extends Component{
         getContent = <TaskDetail
           changeContent={this.changeContent.bind(this)}
           currentTask={this.state.currentTask} />;
+        break;
+      case 4:
+        getContent = <AddLogo
+          changeContent={this.changeContent.bind(this)}
+          createTasks={this.createTasks.bind(this)} />;
         break;
       default:
         getContent = 'Page not found';

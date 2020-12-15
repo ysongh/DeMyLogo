@@ -46,7 +46,7 @@ const TaskDetail = ({ changeContent, currentTask }) => {
           <Typography className={classes.grow} variant="body1" gutterBottom>
             Posted On Dec 7, 2020
           </Typography>
-          <Button className={classes.btnAdd} size="large">
+          <Button className={classes.btnAdd} size="large" onClick={() => changeContent(4)}>
             Upload Logo
           </Button>
         </Box>
