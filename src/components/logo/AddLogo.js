@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { DropzoneDialog } from 'material-ui-dropzone';
 import { Grid, Card, CardContent, FormControl, TextField, Typography, Button } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
@@ -16,9 +17,30 @@ const AddLogo = ({ changeContent }) => {
   const classes = useStyles();
   const [walletAddress, setWalletAddress] = useState('');
   const [email, setEmail] = useState('');
+  const [openUpload, setOpenUpload] = useState(false);
+  const [buffer, setBuffer] = useState('');
+
+  const handleFileClose = () => {
+    setOpenUpload(false);
+  }
+
+  const handleFileSave = files => {
+    const file = files[0];
+    const reader = new window.FileReader();
+
+    reader.readAsArrayBuffer(file);
+    reader.onloadend = () => {
+      setBuffer(Buffer(reader.result));
+    }
+    setOpenUpload(false);
+  }
+
+  const handleFileOpen = () => {
+    setOpenUpload(true);
+  }
 
   const onSubmit = () => {
-    console.log(walletAddress, email);
+    console.log(walletAddress, email, buffer);
   }
 
   return (
@@ -31,6 +53,10 @@ const AddLogo = ({ changeContent }) => {
             </Typography>
             
             <form className="mb-2">
+              <Button className="secondary-color" variant="contained" size="large" onClick={() => handleFileOpen()}>
+                Add Image
+              </Button>
+
               <FormControl fullWidth={true} margin="normal">
                 <TextField
                   type="text"
@@ -62,6 +88,15 @@ const AddLogo = ({ changeContent }) => {
           </CardContent>
         </Card>
       </Grid>
+
+      <DropzoneDialog
+        open={openUpload}
+        onSave={(e) => handleFileSave(e)}
+        acceptedFiles={['image/jpeg', 'image/png', 'image/bmp']}
+        showPreviews={true}
+        maxFileSize={5000000}
+        onClose={() => handleFileClose()}
+      />
     </Grid>
   );
 }
