@@ -78,6 +78,14 @@ class Main extends Component{
     }
   }
 
+  async createLogo(fileHash, email){
+    const receipt = await this.state.deMyLogoBlockchain.methods.createLogo(fileHash, email, this.state.currentTask.owner).send({ from: this.state.account });
+    
+    if(receipt.status){
+      this.setState({ contentNumber: 3 });
+    }
+  }
+
   changeContent(num){
     this.setState({ contentNumber: num });  
   }
@@ -113,7 +121,7 @@ class Main extends Component{
       case 4:
         getContent = <AddLogo
           changeContent={this.changeContent.bind(this)}
-          createTasks={this.createTasks.bind(this)} />;
+          createLogo={this.createLogo.bind(this)} />;
         break;
       default:
         getContent = 'Page not found';

@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const AddLogo = ({ changeContent }) => {
+const AddLogo = ({ changeContent, createLogo }) => {
   const classes = useStyles();
   const [walletAddress, setWalletAddress] = useState('');
   const [email, setEmail] = useState('');
@@ -43,13 +43,11 @@ const AddLogo = ({ changeContent }) => {
   }
 
   const onSubmit = () => {
-    console.log(walletAddress, email, buffer);
     ipfs.add(buffer, (error, result) => {
-      console.log(result);
-
       if(error) {
         console.error(error);
       }
+      createLogo(result[0].hash, email);
     });
   }
 
