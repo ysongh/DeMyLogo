@@ -53,7 +53,7 @@ contract DeMyLogo {
   function createLogo(string memory _fileHash, string memory _email, address _owner) public {
     logoCount++;
 
-    logos[logoCount] = Logo(taskCount, _fileHash, _email, msg.sender, _owner);
+    logos[logoCount] = Logo(logoCount, _fileHash, _email, msg.sender, _owner);
     emit LogoCreated(logoCount, _fileHash, _email, msg.sender, _owner);
   }
 }

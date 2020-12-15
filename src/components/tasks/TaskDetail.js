@@ -2,6 +2,8 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, Box, Typography, Button } from '@material-ui/core';
 
+import Logo from '../logo/Logo';
+
 const useStyles = makeStyles(() => ({
   grow: { flexGrow: 1 },
   mt: { marginTop: '10px'},
@@ -16,7 +18,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const TaskDetail = ({ changeContent, currentTask }) => {
+const TaskDetail = ({ changeContent, currentTask, logos }) => {
   const classes = useStyles();
 
   return (
@@ -51,6 +53,8 @@ const TaskDetail = ({ changeContent, currentTask }) => {
           </Button>
         </Box>
       </Paper>
+      
+      <Logo logos={logos}/>
     </div>
   );
 }

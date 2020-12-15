@@ -14,7 +14,9 @@ class Main extends Component{
     account: '',
     deMyLogoBlockchain: null,
     taskCount: 0,
+    logoCount: 0,
     tasks: [],
+    logos: [],
     currentTask: {},
     contentNumber: 1
   }
@@ -23,6 +25,7 @@ class Main extends Component{
     await this.loadWeb3();
     await this.loadBlockchainData();
     await this.getTasks();
+    await this.getLogos();
   }
 
   async loadWeb3(){
@@ -57,6 +60,9 @@ class Main extends Component{
 
       const taskCount = await deMyLogoBlockchain.methods.taskCount().call();
       this.setState({ taskCount });
+
+      const logoCount = await deMyLogoBlockchain.methods.logoCount().call();
+      this.setState({ logoCount });
     }else{
       window.alert('Contract is not deployed to detected network')
     }
@@ -68,6 +74,14 @@ class Main extends Component{
       this.setState({ tasks: [task, ...this.state.tasks] });
     }
     console.log(this.state.tasks, this.state.task);
+  }
+
+  async getLogos(){
+    for(let i = 0; i < this.state.logoCount; i++){
+      const logo = await this.state.deMyLogoBlockchain.methods.logos(i + 1).call();
+      this.setState({ logos: [logo, ...this.state.logos] });
+    }
+    console.log(this.state.logos);
   }
 
   async createTasks(taskName, taskDescription, taskContact, taskAmount){
@@ -116,7 +130,8 @@ class Main extends Component{
       case 3:
         getContent = <TaskDetail
           changeContent={this.changeContent.bind(this)}
-          currentTask={this.state.currentTask} />;
+          currentTask={this.state.currentTask}
+          logos={this.state.logos} />;
         break;
       case 4:
         getContent = <AddLogo
