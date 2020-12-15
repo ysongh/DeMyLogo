@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { DropzoneDialog } from 'material-ui-dropzone';
 import { Grid, Card, CardContent, FormControl, TextField, Typography, Button } from '@material-ui/core';
+import ipfsClient from 'ipfs-http-client';
+
+const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
 
 const useStyles = makeStyles(() => ({
   mt: { marginTop: '20px'},
@@ -41,6 +44,13 @@ const AddLogo = ({ changeContent }) => {
 
   const onSubmit = () => {
     console.log(walletAddress, email, buffer);
+    ipfs.add(buffer, (error, result) => {
+      console.log(result);
+
+      if(error) {
+        console.error(error);
+      }
+    });
   }
 
   return (
