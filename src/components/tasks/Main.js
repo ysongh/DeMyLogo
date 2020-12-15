@@ -6,6 +6,7 @@ import DeMyLogo from '../../abis/DeMyLogo.json';
 import Navbar from './Navbar';
 import Tasks from './Tasks';
 import AddTask from './AddTask';
+import TaskDetail from './TaskDetail';
 
 class Main extends Component{
   state = {
@@ -13,6 +14,7 @@ class Main extends Component{
     deMyLogoBlockchain: null,
     taskCount: 0,
     tasks: [],
+    currentTask: {},
     contentNumber: 1
   }
 
@@ -79,6 +81,14 @@ class Main extends Component{
     this.setState({ contentNumber: num });  
   }
 
+  getTaskDetail(id){
+    const task = this.state.tasks[this.state.taskCount - id];
+    this.setState({
+      currentTask: task,
+      contentNumber: 3
+    });
+  }
+
   render(){
     let getContent;
 
@@ -86,12 +96,18 @@ class Main extends Component{
       case 1:
         getContent = <Tasks
           changeContent={this.changeContent.bind(this)}
+          getTaskDetail={this.getTaskDetail.bind(this)}
           tasks={this.state.tasks} />;
         break;
       case 2:
         getContent = <AddTask
           changeContent={this.changeContent.bind(this)}
           createTasks={this.createTasks.bind(this)} />;
+        break;
+      case 3:
+        getContent = <TaskDetail
+          changeContent={this.changeContent.bind(this)}
+          currentTask={this.state.currentTask} />;
         break;
       default:
         getContent = 'Page not found';

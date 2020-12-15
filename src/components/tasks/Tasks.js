@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Tasks = ({ changeContent, tasks }) => {
+const Tasks = ({ changeContent, getTaskDetail, tasks }) => {
   const classes = useStyles();
 
   return (
@@ -47,7 +47,7 @@ const Tasks = ({ changeContent, tasks }) => {
                   <Typography variant="body1">
                     { task.description }
                   </Typography>
-                  <Button className={classes.btnView}>
+                  <Button className={classes.btnView} onClick={() => getTaskDetail(task.taskId)}>
                     View
                   </Button>
                 </Grid>
