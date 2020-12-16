@@ -8,6 +8,11 @@ const useStyles = makeStyles(() => ({
   paper: {
     padding: '15px'
   },
+  endText: {
+    marginLeft: '10px',
+    marginTop: '15px',
+    textTransform: 'uppercase'
+  },
   btnAdd: {
     marginTop: '10px',
     marginBottom: '10px',
@@ -52,7 +57,7 @@ const Tasks = ({ changeContent, getTaskDetail, tasks }) => {
         <Grid item xs={12} sm={9}>
           { tasks.map(task => {
             return(
-              <Card className={classes.mb} key={task.taskId}>
+              <Card className={classes.mb} key={task.taskId} style={{ backgroundColor: task.completed ? '#F1F0F0' : "#FFFFFF"}}>
                 <CardContent>
                   <Grid container spacing={3}>
                     <Grid item xs={12}>
@@ -67,9 +72,14 @@ const Tasks = ({ changeContent, getTaskDetail, tasks }) => {
                       <Typography variant="body1">
                         { task.description }
                       </Typography>
-                      <Button className={classes.btnView} onClick={() => getTaskDetail(task.taskId)}>
-                        View
-                      </Button>
+                      <Box display="flex" alignItems="center">
+                        <Button className={classes.btnView} onClick={() => getTaskDetail(task.taskId)}>
+                          View
+                        </Button>
+                        <Typography className={classes.endText} variant="h6" color="secondary">
+                          { task.completed && "Ended" }
+                        </Typography>
+                      </Box>
                     </Grid>
                   </Grid>
                 </CardContent>
