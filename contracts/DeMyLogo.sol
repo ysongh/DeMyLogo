@@ -43,6 +43,13 @@ contract DeMyLogo {
     address owner
   );
 
+  event Payment (
+    address from,
+    address to,
+    uint taskId,
+    uint amount
+  );
+
   function createTask(string memory _name, string memory _description, string memory _contact, uint _amount) public {
     taskCount++;
 
@@ -55,5 +62,16 @@ contract DeMyLogo {
 
     logos[logoCount] = Logo(logoCount, _fileHash, _email, msg.sender, _owner);
     emit LogoCreated(logoCount, _fileHash, _email, msg.sender, _owner);
+  }
+
+  function payDesigner(uint _taskId, address payable _designer) public payable {
+    Task memory _task = tasks[_taskId];
+
+    address(_designer).transfer(msg.value);
+
+    _task.completed = true;
+    tasks[_taskId] = _task;
+
+    emit Payment(msg.sender, _designer, _taskId, _task.amount);
   }
 }
