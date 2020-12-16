@@ -10,7 +10,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Logo = ({ logos }) => {
+const Logo = ({ payDesigner, logos, taskId, amount }) => {
   const classes = useStyles();
 
   return (
@@ -25,7 +25,7 @@ const Logo = ({ logos }) => {
                   { logo.email }
                 </Typography>
 
-                <Button className={classes.btn} fullWidth>
+                <Button className={classes.btn} fullWidth onClick={() => payDesigner(taskId, logo.designer, amount)}>
                   Pay
                 </Button>
               </CardContent>

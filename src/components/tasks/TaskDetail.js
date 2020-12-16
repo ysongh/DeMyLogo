@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const TaskDetail = ({ changeContent, currentTask, logos }) => {
+const TaskDetail = ({ changeContent, payDesigner, currentTask, logos }) => {
   const classes = useStyles();
 
   return (
@@ -48,13 +48,13 @@ const TaskDetail = ({ changeContent, currentTask, logos }) => {
           <Typography className={classes.grow} variant="body1" gutterBottom>
             Posted On Dec 7, 2020
           </Typography>
-          <Button className={classes.btnAdd} size="large" onClick={() => changeContent(4)}>
-            Upload Logo
+          <Button className={classes.btnAdd} size="large" disabled={currentTask.completed} onClick={() => changeContent(4)}>
+            { currentTask.completed ? "Ended" : "Upload Logo" }
           </Button>
         </Box>
       </Paper>
       
-      <Logo logos={logos}/>
+      <Logo logos={logos} payDesigner={payDesigner} taskId={currentTask.taskId} amount={currentTask.amount}/>
     </div>
   );
 }

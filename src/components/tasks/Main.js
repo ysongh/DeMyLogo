@@ -101,6 +101,14 @@ class Main extends Component{
     }
   }
 
+  async payDesigner(taskId, designerAddress, amount){
+    const receipt = await this.state.deMyLogoBlockchain.methods.payDesigner(taskId, designerAddress).send({ from: this.state.account, value: window.web3.utils.toWei(amount, 'Ether')});
+    
+    if(receipt.status){
+      console.log(receipt);
+    }
+  }
+
   changeContent(num){
     this.setState({ contentNumber: num });  
   }
@@ -135,6 +143,7 @@ class Main extends Component{
       case 3:
         getContent = <TaskDetail
           changeContent={this.changeContent.bind(this)}
+          payDesigner={this.payDesigner.bind(this)}
           currentTask={this.state.currentTask}
           logos={this.state.currentLogos} />;
         break;
