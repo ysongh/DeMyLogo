@@ -87,9 +87,12 @@ class Main extends Component{
 
   async createTasks(taskName, taskDescription, taskContact, taskAmount){
     const receipt = await this.state.deMyLogoBlockchain.methods.createTask(taskName, taskDescription, taskContact, taskAmount).send({ from: this.state.account });
-    console.log(receipt)
     if(receipt.status){
-      this.setState({ contentNumber: 1 });
+      this.setState({
+        tasks: [receipt.events.TaskCreated.returnValues, ...this.state.tasks],
+        taskCount: +this.state.taskCount + 1,
+        contentNumber: 1
+      });
     }
   }
 
