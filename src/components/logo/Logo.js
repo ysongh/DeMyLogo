@@ -17,10 +17,10 @@ const Logo = ({ logos }) => {
     <Grid className={classes.mt} container spacing={3}>
       { logos.map(logo => {
         return(
-          <Grid item xs={6} md={4} lg={3}>
+          <Grid item xs={6} md={4} lg={3} key={logo.logoId}>
             <Card className={classes.mb} key={logo.logoId}>
               <CardContent>
-                <img src={`https://ipfs.infura.io/ipfs/${logo.fileHash}`}/>
+                <img src={`https://ipfs.infura.io/ipfs/${logo.fileHash}`} alt="Logo" />
                 <Typography variant="h6">
                   { logo.email }
                 </Typography>

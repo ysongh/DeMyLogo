@@ -18,6 +18,7 @@ class Main extends Component{
     tasks: [],
     logos: [],
     currentTask: {},
+    currentLogos: [],
     contentNumber: 1
   }
 
@@ -106,8 +107,12 @@ class Main extends Component{
 
   getTaskDetail(id){
     const task = this.state.tasks[this.state.taskCount - id];
+    let logos = this.state.logos;
+    logos = logos.filter(logo => logo.owner === task.owner);
+
     this.setState({
       currentTask: task,
+      currentLogos: logos,
       contentNumber: 3
     });
   }
@@ -131,7 +136,7 @@ class Main extends Component{
         getContent = <TaskDetail
           changeContent={this.changeContent.bind(this)}
           currentTask={this.state.currentTask}
-          logos={this.state.logos} />;
+          logos={this.state.currentLogos} />;
         break;
       case 4:
         getContent = <AddLogo
