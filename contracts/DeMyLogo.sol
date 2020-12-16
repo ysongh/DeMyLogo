@@ -23,6 +23,7 @@ contract DeMyLogo {
     string email;
     address designer;
     address owner;
+    uint taskId;
   }
 
   event TaskCreated (
@@ -40,7 +41,8 @@ contract DeMyLogo {
     string fileHash,
     string email,
     address designer,
-    address owner
+    address owner,
+    uint taskId
   );
 
   event Payment (
@@ -57,11 +59,11 @@ contract DeMyLogo {
     emit TaskCreated(taskCount, _name, _description, _contact, _amount, false, msg.sender);
   }
 
-  function createLogo(string memory _fileHash, string memory _email, address _owner) public {
+  function createLogo(string memory _fileHash, string memory _email, address _owner, uint _taskId) public {
     logoCount++;
 
-    logos[logoCount] = Logo(logoCount, _fileHash, _email, msg.sender, _owner);
-    emit LogoCreated(logoCount, _fileHash, _email, msg.sender, _owner);
+    logos[logoCount] = Logo(logoCount, _fileHash, _email, msg.sender, _owner, _taskId);
+    emit LogoCreated(logoCount, _fileHash, _email, msg.sender, _owner, _taskId);
   }
 
   function payDesigner(uint _taskId, address payable _designer) public payable {

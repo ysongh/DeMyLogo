@@ -97,7 +97,7 @@ class Main extends Component{
   }
 
   async createLogo(fileHash, email){
-    const receipt = await this.state.deMyLogoBlockchain.methods.createLogo(fileHash, email, this.state.currentTask.owner).send({ from: this.state.account });
+    const receipt = await this.state.deMyLogoBlockchain.methods.createLogo(fileHash, email, this.state.currentTask.owner, this.state.currentTask.taskId).send({ from: this.state.account });
     
     if(receipt.status){
       this.setState({ contentNumber: 3 });
@@ -119,6 +119,7 @@ class Main extends Component{
   getTaskDetail(id){
     const task = this.state.tasks[this.state.taskCount - id];
     let logos = this.state.logos;
+    logos = logos.filter(logo => logo.taskId === task.taskId);
     logos = logos.filter(logo => logo.owner === task.owner);
 
     this.setState({

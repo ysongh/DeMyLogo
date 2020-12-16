@@ -70,9 +70,10 @@ contract(DeMyLogo, ([deployer, user1, user2]) => {
 
         const fileHash = '28dioaF823jifjf2i3jifjisfwdlsk3isof'
         const email = "somecompany123@mail.com";
+        const taskId = 1;
 
         before(async() => {
-            result = await deMyLogo.createLogo(fileHash, email, user1, { from: user2 });
+            result = await deMyLogo.createLogo(fileHash, email, user1, taskId, { from: user2 });
             logoCount = await deMyLogo.logoCount();
         });
 
@@ -83,6 +84,7 @@ contract(DeMyLogo, ([deployer, user1, user2]) => {
             assert.equal(event.email, email, 'Email is correct');
             assert.equal(event.designer, user2, 'Designer is correct');
             assert.equal(event.owner, user1, 'Owner is correct');
+            assert.equal(event.taskId.toNumber(), taskId, 'Task Id is correct');
         });
 
         it('has correct logo count', async() => {
@@ -96,6 +98,7 @@ contract(DeMyLogo, ([deployer, user1, user2]) => {
             assert.equal(logo.email, email, 'Email is correct');
             assert.equal(logo.designer, user2, 'Designer is correct');
             assert.equal(logo.owner, user1, 'Owner is correct');
+            assert.equal(logo.taskId.toNumber(), taskId, 'Task Id is correct');
         });
     });
 
