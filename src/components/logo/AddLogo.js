@@ -18,7 +18,6 @@ const useStyles = makeStyles(() => ({
 
 const AddLogo = ({ changeContent, createLogo }) => {
   const classes = useStyles();
-  const [walletAddress, setWalletAddress] = useState('');
   const [email, setEmail] = useState('');
   const [openUpload, setOpenUpload] = useState(false);
   const [buffer, setBuffer] = useState('');
@@ -64,16 +63,6 @@ const AddLogo = ({ changeContent, createLogo }) => {
               <Button className="secondary-color" variant="contained" size="large" onClick={() => handleFileOpen()}>
                 Add Image
               </Button>
-
-              <FormControl fullWidth={true} margin="normal">
-                <TextField
-                  type="text"
-                  name="walletAddress"
-                  value={walletAddress}
-                  onChange={e => setWalletAddress(e.target.value)}
-                  label="Wallet Address"
-                  variant="outlined" />
-              </FormControl>
 
               <FormControl fullWidth={true} margin="normal">
                 <TextField

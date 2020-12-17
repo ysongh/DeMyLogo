@@ -17,7 +17,6 @@ const AddTask = ({ changeContent, createTasks }) => {
   const [name, setName] = useState('');
   const [instruction, setInstruction] = useState('');
   const [contact, setContact] = useState('');
-  const [walletAddress, setWalletAddress] = useState('');
   const [amount, setAmount] = useState('');
 
   const onSubmit = () => {
@@ -64,16 +63,6 @@ const AddTask = ({ changeContent, createTasks }) => {
                   variant="outlined"
                   rows={5} 
                   multiline />
-              </FormControl>
-
-              <FormControl fullWidth={true} margin="normal">
-                <TextField
-                  type="text"
-                  name="walletAddress"
-                  value={walletAddress}
-                  onChange={e => setWalletAddress(e.target.value)}
-                  label="Wallet Address"
-                  variant="outlined" />
               </FormControl>
 
               <FormControl fullWidth={true} margin="normal">
