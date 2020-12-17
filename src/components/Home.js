@@ -12,10 +12,10 @@ import Navbar from './layout/Navbar';
 const useStyles = makeStyles(() => ({
   grow: { flexGrow: 1 },
   mt: { marginTop: '40px'},
-  mb: { marginBottom: '10px'},
+  mb: { marginBottom: '60px'},
   header: {
     marginTop: '70px',
-    marginBottom: '30px'
+    marginBottom: '45px'
   },
   headerh1: {
     textTransform: 'uppercase',
@@ -56,7 +56,7 @@ const Home = () => {
   return(
     <div>
       <Navbar />
-      
+
       <Container>
         <header>
           <Grid className={classes.header} container spacing={7}>
@@ -142,7 +142,7 @@ const Home = () => {
             How it works
           </Typography>
 
-          <Grid container spacing={7}>
+          <Grid className={classes.mb} container spacing={7}>
             <Grid item sm={12} md={6}>
               <Card>
                 <CardContent>

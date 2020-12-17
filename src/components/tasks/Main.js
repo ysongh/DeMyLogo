@@ -163,7 +163,7 @@ class Main extends Component{
     return (
       <div>
         <Navbar account={this.state.account} />
-        <Container>
+        <Container style={{ minHeight: '70vh', marginBottom: '40px'}}>
           { getContent }
         </Container>
       </div>
