@@ -100,7 +100,11 @@ class Main extends Component{
     const receipt = await this.state.deMyLogoBlockchain.methods.createLogo(fileHash, email, this.state.currentTask.owner, this.state.currentTask.taskId).send({ from: this.state.account });
     
     if(receipt.status){
-      this.setState({ contentNumber: 3 });
+      this.setState({
+        logos: [receipt.events.LogoCreated.returnValues, ...this.state.logos],
+        currentLogos: [receipt.events.LogoCreated.returnValues, ...this.state.currentLogos],
+        contentNumber: 3
+      });
     }
   }
 

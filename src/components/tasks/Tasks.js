@@ -66,7 +66,7 @@ const Tasks = ({ changeContent, getTaskDetail, tasks }) => {
                           { task.name }
                         </Typography>
                         <Typography variant="h4">
-                          { task.amount }
+                          { task.amount } BNB
                         </Typography>
                       </Box>
                       <Typography variant="body1">

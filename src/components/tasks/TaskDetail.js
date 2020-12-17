@@ -32,7 +32,7 @@ const TaskDetail = ({ changeContent, payDesigner, currentTask, logos }) => {
             Tasks
           </Typography>
           <Typography variant="h4">
-            { currentTask.amount }
+            { currentTask.amount } BNB
           </Typography>
         </Box>
         <Typography variant="body1" gutterBottom>
