@@ -146,7 +146,7 @@ const Home = () => {
             <Grid item sm={12} md={6}>
               <Card>
                 <CardContent>
-                  <Typography className={classes.mb} variant="h4">
+                  <Typography variant="h4">
                     For Companies
                   </Typography>
                   <Typography className={classes.listText} variant="body1">
@@ -165,7 +165,7 @@ const Home = () => {
             <Grid item sm={12} md={6}>
               <Card>
                 <CardContent>
-                  <Typography className={classes.mb} variant="h4">
+                  <Typography variant="h4">
                     For Designers
                   </Typography>
                   <Typography className={classes.listText} variant="body1">
