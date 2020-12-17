@@ -54,7 +54,7 @@ const TaskDetail = ({ changeContent, payDesigner, currentTask, logos }) => {
         </Box>
       </Paper>
       
-      <Logo logos={logos} payDesigner={payDesigner} taskId={currentTask.taskId} amount={currentTask.amount}/>
+      <Logo completed={currentTask.completed} logos={logos} payDesigner={payDesigner} taskId={currentTask.taskId} amount={currentTask.amount}/>
     </div>
   );
 }

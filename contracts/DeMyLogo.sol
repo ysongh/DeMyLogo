@@ -23,6 +23,7 @@ contract DeMyLogo {
     string email;
     address designer;
     address owner;
+    bool winner;
     uint taskId;
   }
 
@@ -42,6 +43,7 @@ contract DeMyLogo {
     string email,
     address designer,
     address owner,
+    bool winner,
     uint taskId
   );
 
@@ -62,17 +64,21 @@ contract DeMyLogo {
   function createLogo(string memory _fileHash, string memory _email, address _owner, uint _taskId) public {
     logoCount++;
 
-    logos[logoCount] = Logo(logoCount, _fileHash, _email, msg.sender, _owner, _taskId);
-    emit LogoCreated(logoCount, _fileHash, _email, msg.sender, _owner, _taskId);
+    logos[logoCount] = Logo(logoCount, _fileHash, _email, msg.sender, _owner, false, _taskId);
+    emit LogoCreated(logoCount, _fileHash, _email, msg.sender, _owner, false,  _taskId);
   }
 
-  function payDesigner(uint _taskId, address payable _designer) public payable {
+  function payDesigner(uint _taskId, address payable _designer, uint _logoId) public payable {
     Task memory _task = tasks[_taskId];
+    Logo memory _logo = logos[_logoId];
 
     address(_designer).transfer(msg.value);
 
     _task.completed = true;
     tasks[_taskId] = _task;
+
+    _logo.winner = true;
+    logos[_logoId] =_logo;
 
     emit Payment(msg.sender, _designer, _taskId, _task.amount);
   }

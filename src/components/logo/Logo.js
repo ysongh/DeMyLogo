@@ -10,7 +10,7 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const Logo = ({ payDesigner, logos, taskId, amount }) => {
+const Logo = ({ completed, payDesigner, logos, taskId, amount }) => {
   const classes = useStyles();
 
   return (
@@ -20,14 +20,19 @@ const Logo = ({ payDesigner, logos, taskId, amount }) => {
           <Grid item xs={6} md={4} lg={3} key={logo.logoId}>
             <Card className={classes.mb} key={logo.logoId}>
               <CardContent>
-                <img src={`https://ipfs.infura.io/ipfs/${logo.fileHash}`} alt="Logo" />
+                <img className="fullwidthimage" src={`https://ipfs.infura.io/ipfs/${logo.fileHash}`} alt="Logo" />
                 <Typography variant="h6">
                   { logo.email }
                 </Typography>
 
-                <Button className={classes.btn} fullWidth onClick={() => payDesigner(taskId, logo.designer, amount)}>
-                  Pay
-                </Button>
+                { !completed
+                  && <Button className={classes.btn} fullWidth onClick={() => payDesigner(taskId, logo.designer, amount, logo.logoId)}>
+                      Pay
+                    </Button>
+                }
+                <Typography variant="h5" color="primary" align="center">
+                  { logo.winner && "Winner" }
+                </Typography>
               </CardContent>
             </Card>
           </Grid>

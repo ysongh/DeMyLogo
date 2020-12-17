@@ -84,6 +84,7 @@ contract(DeMyLogo, ([deployer, user1, user2]) => {
             assert.equal(event.email, email, 'Email is correct');
             assert.equal(event.designer, user2, 'Designer is correct');
             assert.equal(event.owner, user1, 'Owner is correct');
+            assert.equal(event.winner, false, 'Winner is correct');
             assert.equal(event.taskId.toNumber(), taskId, 'Task Id is correct');
         });
 
@@ -98,6 +99,7 @@ contract(DeMyLogo, ([deployer, user1, user2]) => {
             assert.equal(logo.email, email, 'Email is correct');
             assert.equal(logo.designer, user2, 'Designer is correct');
             assert.equal(logo.owner, user1, 'Owner is correct');
+            assert.equal(logo.winner, false, 'Winner is correct');
             assert.equal(logo.taskId.toNumber(), taskId, 'Task Id is correct');
         });
     });
@@ -105,8 +107,9 @@ contract(DeMyLogo, ([deployer, user1, user2]) => {
     describe('pay designer ', async() => {
         let result;
         let task;
+        let taskId = 1;
+        let logoId = 1;
         
-
         before(async() => {
             task = await deMyLogo.tasks(1);
         });
@@ -115,7 +118,7 @@ contract(DeMyLogo, ([deployer, user1, user2]) => {
             let oldDesignerBalanace = await web3.eth.getBalance(user2);
             oldDesignerBalanace = new web3.utils.BN(oldDesignerBalanace);
 
-            result = await deMyLogo.payDesigner(1, user2, { from: user1, value: web3.utils.toWei(task.amount.toString(), 'Ether') });
+            result = await deMyLogo.payDesigner(taskId, user2, logoId, { from: user1, value: web3.utils.toWei(task.amount.toString(), 'Ether') });
             
             let newDesignerBalanace = await web3.eth.getBalance(user2);
             newDesignerBalanace = new web3.utils.BN(newDesignerBalanace);
@@ -130,13 +133,18 @@ contract(DeMyLogo, ([deployer, user1, user2]) => {
             const event = result.logs[0].args;
             assert.equal(event.from, user1, 'Owner address is correct');
             assert.equal(event.to, user2, 'Designer address is correct');
-            assert.equal(event.taskId, 1, 'Task Id is correct');
+            assert.equal(event.taskId, taskId, 'Task Id is correct');
             assert.equal(event.amount.toString(), task.amount.toString(), 'Amount is correct');
         });
 
         it('set task completed to true', async() => {
-            let task = await deMyLogo.tasks(1);
+            let task = await deMyLogo.tasks(taskId);
             assert.equal(task.completed, true);
+        });
+
+        it('set logo winner to true', async() => {
+            let logo = await deMyLogo.logos(logoId);
+            assert.equal(logo.winner, true);
         });
     });
 })

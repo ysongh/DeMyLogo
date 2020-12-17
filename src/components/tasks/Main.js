@@ -108,8 +108,8 @@ class Main extends Component{
     }
   }
 
-  async payDesigner(taskId, designerAddress, amount){
-    const receipt = await this.state.deMyLogoBlockchain.methods.payDesigner(taskId, designerAddress).send({ from: this.state.account, value: window.web3.utils.toWei(amount, 'Ether')});
+  async payDesigner(taskId, designerAddress, amount, logoId){
+    const receipt = await this.state.deMyLogoBlockchain.methods.payDesigner(taskId, designerAddress, logoId).send({ from: this.state.account, value: window.web3.utils.toWei(amount, 'Ether')});
     
     if(receipt.status){
       console.log(receipt);
