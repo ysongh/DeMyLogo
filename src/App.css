@@ -2,3 +2,21 @@
 .secondary-color{ background-color: #D2D868 !important; }
 
 .fullwidthimage{ width: 100%; }
+
+.logo{
+    width: 125px;
+}
+
+.flexspace{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.white-link,
+.white-link:link,
+.white-link:visited{
+  text-decoration: inherit !important;
+  color: white;
+  margin: 0 .7rem;
+}

@@ -1,10 +1,10 @@
 import React from 'react';
-import { AppBar, Container, Toolbar, Link, Typography } from '@material-ui/core';
+import { AppBar, Container, Toolbar, Link } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 
 import Logo from '../../images/logo.png';
 
-const Navbar = ({ account }) => {
+const Navbar = () => {
   return (
     <AppBar position="static" className="primary-color">
       <Container>
@@ -12,9 +12,17 @@ const Navbar = ({ account }) => {
           <Link component={RouterLink} to="/">
             <img src={Logo} className="logo" alt="Logo" />
           </Link>
-          <Typography variant="body2">
-            { account }
-          </Typography>
+          <div>
+            <Link className="white-link" component={RouterLink} to="/">
+              Home
+            </Link>
+            <Link className="white-link" component={RouterLink} to="/">
+              About
+            </Link>
+            <Link className="white-link" component={RouterLink} to="/tasks">
+              Tasks
+            </Link>
+          </div>
         </Toolbar>
       </Container>
     </AppBar>
