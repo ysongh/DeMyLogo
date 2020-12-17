@@ -24,3 +24,9 @@
 .footer{
   padding: 30px 0;
 }
+
+.spinner{
+  display: block !important;
+  margin: 20px auto;
+  color: #AC9742 !important;
+}

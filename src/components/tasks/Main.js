@@ -19,7 +19,8 @@ class Main extends Component{
     logos: [],
     currentTask: {},
     currentLogos: [],
-    contentNumber: 1
+    contentNumber: 1,
+    loading: false
   }
 
   async componentWillMount(){
@@ -86,6 +87,8 @@ class Main extends Component{
   }
 
   async createTasks(taskName, taskDescription, taskContact, taskAmount){
+    this.setState({ loading: true });
+
     const receipt = await this.state.deMyLogoBlockchain.methods.createTask(taskName, taskDescription, taskContact, taskAmount).send({ from: this.state.account });
     if(receipt.status){
       this.setState({
@@ -94,9 +97,13 @@ class Main extends Component{
         contentNumber: 1
       });
     }
+
+    this.setState({ loading: false });
   }
 
   async createLogo(fileHash, email){
+    this.setState({ loading: true });
+
     const receipt = await this.state.deMyLogoBlockchain.methods.createLogo(fileHash, email, this.state.currentTask.owner, this.state.currentTask.taskId).send({ from: this.state.account });
     
     if(receipt.status){
@@ -106,6 +113,8 @@ class Main extends Component{
         contentNumber: 3
       });
     }
+
+    this.setState({ loading: false });
   }
 
   async payDesigner(taskId, designerAddress, amount, logoId){
@@ -146,7 +155,8 @@ class Main extends Component{
       case 2:
         getContent = <AddTask
           changeContent={this.changeContent.bind(this)}
-          createTasks={this.createTasks.bind(this)} />;
+          createTasks={this.createTasks.bind(this)}
+          loading={this.state.loading} />;
         break;
       case 3:
         getContent = <TaskDetail
@@ -158,7 +168,8 @@ class Main extends Component{
       case 4:
         getContent = <AddLogo
           changeContent={this.changeContent.bind(this)}
-          createLogo={this.createLogo.bind(this)} />;
+          createLogo={this.createLogo.bind(this)}
+          loading={this.state.loading} />;
         break;
       default:
         getContent = 'Page not found';

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Card, CardContent, FormControl, TextField, Typography, Button } from '@material-ui/core';
+import { Grid, Card, CardContent, FormControl, TextField, Typography, CircularProgress, Button } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
   mt: { marginTop: '20px'},
@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const AddTask = ({ changeContent, createTasks }) => {
+const AddTask = ({ changeContent, createTasks, loading }) => {
   const classes = useStyles();
   const [name, setName] = useState('');
   const [instruction, setInstruction] = useState('');
@@ -75,10 +75,13 @@ const AddTask = ({ changeContent, createTasks }) => {
                   variant="outlined" />
               </FormControl>
 
-              <Button className={classes.btn} variant="contained" fullWidth onClick={() => onSubmit()}>
-                Submit
-              </Button>
-
+              { loading
+                ? <CircularProgress className="spinner" size={60} />
+                : <Button className={classes.btn} variant="contained" fullWidth onClick={() => onSubmit()}>
+                    Submit
+                  </Button>
+              }
+              
               <Button variant="contained" fullWidth onClick={() => changeContent(1)}>
                 Back
               </Button>

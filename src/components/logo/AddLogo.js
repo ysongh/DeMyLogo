@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { DropzoneDialog } from 'material-ui-dropzone';
-import { Grid, Card, CardContent, FormControl, TextField, Typography, Button } from '@material-ui/core';
+import { Grid, Card, CardContent, FormControl, TextField, Typography, CircularProgress, Button } from '@material-ui/core';
 import ipfsClient from 'ipfs-http-client';
 
 const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const AddLogo = ({ changeContent, createLogo }) => {
+const AddLogo = ({ changeContent, createLogo, loading }) => {
   const classes = useStyles();
   const [email, setEmail] = useState('');
   const [openUpload, setOpenUpload] = useState(false);
@@ -74,10 +74,13 @@ const AddLogo = ({ changeContent, createLogo }) => {
                   variant="outlined" />
               </FormControl>
 
-              <Button className={classes.btn} variant="contained" fullWidth onClick={() => onSubmit()}>
-                Submit
-              </Button>
-
+              { loading 
+                ? <CircularProgress className="spinner" size={60} />
+                : <Button className={classes.btn} variant="contained" fullWidth onClick={() => onSubmit()}>
+                    Submit
+                  </Button>
+              }
+              
               <Button variant="contained" fullWidth onClick={() => changeContent(3)}>
                 Back
               </Button>
