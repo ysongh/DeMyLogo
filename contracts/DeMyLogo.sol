@@ -51,7 +51,8 @@ contract DeMyLogo {
     address from,
     address to,
     uint taskId,
-    uint amount
+    uint amount,
+    uint logoId
   );
 
   function createTask(string memory _name, string memory _description, string memory _contact, uint _amount) public {
@@ -80,6 +81,6 @@ contract DeMyLogo {
     _logo.winner = true;
     logos[_logoId] =_logo;
 
-    emit Payment(msg.sender, _designer, _taskId, _task.amount);
+    emit Payment(msg.sender, _designer, _taskId, _task.amount, _logoId);
   }
 }

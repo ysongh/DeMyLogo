@@ -121,7 +121,9 @@ class Main extends Component{
     const receipt = await this.state.deMyLogoBlockchain.methods.payDesigner(taskId, designerAddress, logoId).send({ from: this.state.account, value: window.web3.utils.toWei(amount, 'Ether')});
     
     if(receipt.status){
-      console.log(receipt);
+      let temp = this.state.currentTask;
+      temp.completed = true;
+      this.setState({ currentTask: temp })
     }
   }
 

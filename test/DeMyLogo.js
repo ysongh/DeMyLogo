@@ -135,6 +135,7 @@ contract(DeMyLogo, ([deployer, user1, user2]) => {
             assert.equal(event.to, user2, 'Designer address is correct');
             assert.equal(event.taskId, taskId, 'Task Id is correct');
             assert.equal(event.amount.toString(), task.amount.toString(), 'Amount is correct');
+            assert.equal(event.logoId, logoId, 'Logo Id is correct');
         });
 
         it('set task completed to true', async() => {
