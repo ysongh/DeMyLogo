@@ -10,7 +10,7 @@ const Footer = () => {
           <Grid container spacing={7}>
             <Grid item sm={12} md={3}>
               <Typography variant="h6">
-                Quick Link
+                <u>Quick Link</u>
               </Typography>
               <Typography variant="body1">
                 Home
@@ -24,7 +24,7 @@ const Footer = () => {
             </Grid>
             <Grid item sm={12} md={3}>
               <Typography variant="h6">
-                Company
+                <u>Company</u>
               </Typography>
               <Typography variant="body1">
                 About Us

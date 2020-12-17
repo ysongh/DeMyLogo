@@ -52,7 +52,7 @@ const AddLogo = ({ changeContent, createLogo, loading }) => {
 
   return (
     <Grid container justify="center">
-      <Grid item xs={12} sm={9} md={6}>
+      <Grid item xs={12} sm={9} md={5}>
         <Card className={classes.mt}>
           <CardContent>
             <Typography className="primary-textColor" variant="h5" paragraph align="center">
