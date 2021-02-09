@@ -3,6 +3,8 @@ A dapp where users can create bounties for designers to create their logo and re
 
 - Live Site - https://demylogo.netlify.app/  (Only works in Binance Smart Chain Test Networks)
 - Demo - https://www.youtube.com/watch?v=8mFHWj0Bb1M&feature=youtu.be
+- Won Third Place at Gitcoin R8 Hackathon (Binance X)
+- Blog - https://binancex.dev/blog.html?p=winning-submissions-for-the-gitcoin-r8-hackathon&preview=1
 
 ## Binance Smart Chain Testnet
 - DeMyLogo Contract Address: 0xf038da7F03Dc69C4215647E8df5315Eb3b598380
