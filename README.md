@@ -26,3 +26,6 @@ A dapp where users can create bounties for designers to create their logo and re
 - Open up Ganache and click "Quickstart"
 - Run `truffle migrate` to deploy the contract
 - Run `npm start` to start the dapp
+
+## Disclaimer
+These contracts are not audited.  Please review this code on your own before using any of the following code for production.  I will not be responsible or liable for all loss or damage caused from this project.
